@@ -1,4 +1,4 @@
-LocalImages = new Meteor.Collection('local_images');
+LocalImages = new Meteor.Collection(null);
 
 /*
  * Add query methods like this:

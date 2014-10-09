@@ -7,9 +7,8 @@
 	  	<section>
 	  		{{#if notReady}}
 		  		{{> spinner}}
-	  		{{else}}
-		  		{{> results}}
 	  		{{/if}}
+		  	{{> results}}
 	  	</section>
   	</section>
 </template>
@@ -41,23 +40,25 @@
 </template>
 
 <template name="imageItem">
-	<li>
+	<li class="{{#unless width}}uk-hidden{{/unless}}">
 		<div class="uk-grid uk-grid-preserve" data-uk-grid-match>
 			<div class="uk-width-2-5">
 				<figure class="uk-thumbnail thumbnail">
 			        <img class="uk-container-center" src="{{url}}" alt="">
-			        <figcaption class="uk-thumbnail-caption uk-text-break">{{url}}<br><span class="uk-text-small dimensions"></span></figcaption>
+			        <figcaption class="uk-thumbnail-caption uk-text-break">
+				        {{url}}
+				        <br>
+				        <span class="uk-text-small dimensions">{{width}} x {{height}}</span>
+			        </figcaption>
 		    	</figure>
 	    	</div>
 	    	<form class="uk-form uk-width-3-5 uk-vertical-align uk-height-1-1">
 	    	    <div class="uk-form-row uk-vertical-align-middle">
 	    	        <div class="uk-form-controls">
-	    	            <input type="text" placeholder="Title" class="uk-width-2-5 imageTitle">
-	    	            <input type="text" placeholder="Artist" class="uk-width-2-5 imageArtist">
+	    	            <input type="text" placeholder="Title" class="uk-width-2-5 image-title">
+	    	            <input type="text" placeholder="Artist" class="uk-width-2-5 image-artist">
 	    	            <span class="uk-width-1-5">
-	    	            	{{#with pastec}}
-					    	<button class="uk-button uk-button-primary" type="button" disabled={{not connection}}>Add</button>
-	    	            	{{/with}}
+					    	<button class="uk-button uk-button-primary" type="button" disabled={{not pastec.connection}}>Add</button>
 				    	</span>
 	    	        </div>
 	    	    </div>

@@ -19,7 +19,7 @@ Template.Home.helpers({
    */
    notReady: function() {
     var controller = Router.current();
-    return !controller.routeDict.get('ready');
+    return !controller.routeDict.get('ready') || !LocalImages.find({width: {$exists: true}}).count();
    }
 });
 
@@ -32,29 +32,50 @@ Template.sourceEntry.helpers({
 
 Template.sourceEntry.events({
   'submit .uk-form': function() {
+    LocalImages.remove({});
     rootUrl = $('input').val();
     Router.go('/?url=' + encodeURI(rootUrl));
     return false;
   }
 });
 
+Template.results.helpers({
+  tags: function() {
+    return LocalImages.find();
+  }
+});
 
 Template.imageItem.events({
   'load': function(event, template) {
-    console.log(this);
-    template.$('span.dimensions').html(event.target.naturalWidth + ' x ' + event.target.naturalHeight);
+    if (event.target.naturalWidth >= 150 && event.target.naturalHeight >= 150) {
+      LocalImages.update({_id: this._id}, {$set: {width: event.target.naturalWidth, height: event.target.naturalHeight}});
+    } else {
+      LocalImages.remove({_id: this._id});
+    }
   },
 
-  'click button': function(event, template) {
+  'click button, keyup .image-artist, keyup .image-title': function(event, template) {
+    if (event.type === 'keyup'  && !(event.keyCode === 13)) return false;
     var controller = Router.current(),
         imageDoc = {
           url: this.url,
           index: Images.nextIndex(),
           title: template.$('.image-title').val(),
-          artist: template.$('image-artist').val()
+          artist: template.$('.image-artist').val()
         };
-    Meteor.call('/app/postImage', imageDoc, function(err, res) {
-      if (!err && res && res.data.type === "IMAGE_ADDED") {
+    Meteor.call('/app/post_image', imageDoc, function(err, res) {
+      if (!err && res) {
+        switch(res.type) {
+          case "IMAGE_ADDED":
+            toastr.success('Image Added!', imageDoc.title + ' by ' + imageDoc.artist + ' successfully added.')
+            break;
+          case "IMAGE_SIZE_TOO_BIG":
+            toastr.error('Image Too Small!.', 'Sorry, that image is too small to add.')
+            break;
+          case "IMAGE_SIZE_TOO_SMALL":
+            toastr.error('Image Too Large!.', 'Sorry, that image is too large to add.')
+            break;
+        }
         template.$('li').velocity(
           "slideUp", {
             duration: 1500,
@@ -64,6 +85,7 @@ Template.imageItem.events({
             }
         });
       }
+      else console.log(err);
     });
   }
 })

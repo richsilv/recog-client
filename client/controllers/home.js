@@ -18,9 +18,9 @@ HomeController = RouteController.extend({
 			Meteor.call('/app/get_u_r_l', decodeURI(_this.params.url), function(err, res) {
 				_this.routeDict.set('ready', true);
 				if (!err) {
-					_this.routeDict.set('data', _.reduce(res, function(list, thisUrl) {
-						return Images.find({url: thisUrl}).count() ? list : list.concat({url: thisUrl});
-					}, []));
+					_.each(res, function(thisUrl) {
+						if (!Images.find({url: thisUrl}).count()) LocalImages.insert({url: thisUrl});
+					});
 				}	
 				else throw err;
 			});
