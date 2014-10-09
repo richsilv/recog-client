@@ -1,0 +1,67 @@
+<template name="Home">
+	<section class="uk-container uk-container-center uk-margin-large-top">
+	  	<section class="uk-grid">
+	  		{{> sourceEntry pastec}}
+	  	</section>
+	  	<hr>
+	  	<section>
+	  		{{#if notReady}}
+		  		{{> spinner}}
+	  		{{else}}
+		  		{{> results}}
+	  		{{/if}}
+	  	</section>
+  	</section>
+</template>
+
+<template name="sourceEntry">
+	<form class="uk-form uk-width-1-2">
+		<fieldset data-uk-margin>
+			<legend>Source URL for pictures</legend>
+		    <input  class="uk-width-1-1" type="input" placeholder="Type URL here" value="{{url}}">
+	    </fieldset>
+	</form>
+	<div class="uk-width-1-2">
+		<div class="uk-panel uk-panel-box {{#if connection}}uk-panel-box-primary{{else}}uk-panel-box-secondary{{/if}}">
+		    <div class="uk-panel-badge uk-badge {{#if connection}}uk-badge-success{{else}}uk-badge-danger{{/if}}">{{#if connection}}Connected{{else}}Disconnected{{/if}}</div>
+		    <h3 class="uk-panel-title"><i class="uk-icon-exchange"></i> Pastec Status</h3>
+		    <p>Connection to server at {{url}} is {{#if connection}}UP{{else}}DOWN{{/if}}.</p>
+		</div>
+	</div>
+</template>
+
+<template name="results">
+	{{#if tags}}
+		<ul class="uk-list uk-list-line uk-list-striped">
+			{{#each tags}}
+				{{> imageItem}}
+			{{/each}}
+		</ul>	
+	{{/if}}
+</template>
+
+<template name="imageItem">
+	<li>
+		<div class="uk-grid uk-grid-preserve" data-uk-grid-match>
+			<div class="uk-width-2-5">
+				<figure class="uk-thumbnail thumbnail">
+			        <img class="uk-container-center" src="{{this}}" alt="">
+			        <figcaption class="uk-thumbnail-caption uk-text-break">{{this}}<br><span class="uk-text-small dimensions"></span></figcaption>
+		    	</figure>
+	    	</div>
+	    	<form class="uk-form uk-width-3-5 uk-vertical-align uk-height-1-1">
+	    	    <div class="uk-form-row uk-vertical-align-middle">
+	    	        <div class="uk-form-controls">
+	    	            <input type="text" placeholder="Title" class="uk-width-2-5 imageTitle">
+	    	            <input type="text" placeholder="Artist" class="uk-width-2-5 imageArtist">
+	    	            <span class="uk-width-1-5">
+	    	            	{{#with pastec}}
+					    	<button class="uk-button uk-button-primary" type="button" disabled={{not connection}}>Add</button>
+	    	            	{{/with}}
+				    	</span>
+	    	        </div>
+	    	    </div>
+	    	</form>
+    	</div>
+    </li>
+</template>
