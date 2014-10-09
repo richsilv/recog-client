@@ -15,7 +15,6 @@ deps@1.0.4
 ejson@1.0.3
 fastclick@1.0.0
 follower-livedata@1.0.1
-fourseven:scss@0.9.5
 geojson-utils@1.0.0
 html-tools@1.0.1
 htmljs@1.0.1
@@ -42,12 +41,12 @@ npm-container@1.0.0
 observe-sequence@1.0.2
 ordered-dict@1.0.0
 percolate:velocityjs@1.0.0
+pwldp:uikit-2@1.0.1
 random@1.0.0
 reactive-dict@1.0.3
 reactive-var@1.0.2
 reload@1.1.0
 retry@1.0.0
-richsilv:uikit-2@0.0.0
 routepolicy@1.0.1
 sacha:spin@2.0.4
 session@1.0.2
