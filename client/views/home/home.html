@@ -18,14 +18,14 @@
 	<form class="uk-form uk-width-1-2">
 		<fieldset data-uk-margin>
 			<legend>Source URL for pictures</legend>
-		    <input  class="uk-width-1-1" type="input" placeholder="Type URL here" value="{{url}}">
+		    <input  class="uk-width-1-1" type="input" placeholder="Type URL here" value="{{../url}}">
 	    </fieldset>
 	</form>
 	<div class="uk-width-1-2">
 		<div class="uk-panel uk-panel-box {{#if connection}}uk-panel-box-primary{{else}}uk-panel-box-secondary{{/if}}">
 		    <div class="uk-panel-badge uk-badge {{#if connection}}uk-badge-success{{else}}uk-badge-danger{{/if}}">{{#if connection}}Connected{{else}}Disconnected{{/if}}</div>
 		    <h3 class="uk-panel-title"><i class="uk-icon-exchange"></i> Pastec Status</h3>
-		    <p>Connection to server at {{url}} is {{#if connection}}UP{{else}}DOWN{{/if}}.</p>
+		    <p>Connection to server at {{serverUrl}} is {{#if connection}}UP{{else}}DOWN{{/if}}.</p>
 		</div>
 	</div>
 </template>
@@ -45,8 +45,8 @@
 		<div class="uk-grid uk-grid-preserve" data-uk-grid-match>
 			<div class="uk-width-2-5">
 				<figure class="uk-thumbnail thumbnail">
-			        <img class="uk-container-center" src="{{this}}" alt="">
-			        <figcaption class="uk-thumbnail-caption uk-text-break">{{this}}<br><span class="uk-text-small dimensions"></span></figcaption>
+			        <img class="uk-container-center" src="{{url}}" alt="">
+			        <figcaption class="uk-thumbnail-caption uk-text-break">{{url}}<br><span class="uk-text-small dimensions"></span></figcaption>
 		    	</figure>
 	    	</div>
 	    	<form class="uk-form uk-width-3-5 uk-vertical-align uk-height-1-1">

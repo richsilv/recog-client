@@ -8,7 +8,6 @@ autopublish
 insecure
 iron:router
 http
-meteorhacks:npm
 
 
 npm-container
@@ -16,4 +15,6 @@ reactive-dict
 sacha:spin
 percolate:velocityjs
 pwldp:uikit-2
+meteorhacks:npm
+chrismbeckett:toastr
 

@@ -41,13 +41,14 @@ Template.sourceEntry.events({
 
 Template.imageItem.events({
   'load': function(event, template) {
+    console.log(this);
     template.$('span.dimensions').html(event.target.naturalWidth + ' x ' + event.target.naturalHeight);
   },
 
   'click button': function(event, template) {
     var controller = Router.current(),
         imageDoc = {
-          url: this.valueOf(),
+          url: this.url,
           index: Images.nextIndex(),
           title: template.$('.image-title').val(),
           artist: template.$('image-artist').val()

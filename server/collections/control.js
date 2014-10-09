@@ -38,7 +38,7 @@ Meteor.startup(function() {
     var pastec = Control.findOne({
       key: 'pastec'
     });
-    pastec && HTTP.post(pastec.url, {
+    pastec && HTTP.post(pastec.serverUrl, {
       data: {
         type: "PING"
       }

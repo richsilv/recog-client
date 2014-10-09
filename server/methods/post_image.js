@@ -25,7 +25,7 @@ Meteor.methods({
 	    }));
 	    res.on('end', Meteor.bindEnvironment(function() {
 	    	if (res.statusCode === 200 && buf.length) {
-				HTTP.put(pastec.url + '/index/images/' + image.index.toString(), {content: buf}, function(err, res) {
+				HTTP.put(pastec.serverUrl + '/index/images/' + image.index.toString(), {content: buf}, function(err, res) {
 	  				if (err || !res) {
 	  					fut.throw(err);
 	  					throw err;
