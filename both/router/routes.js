@@ -14,5 +14,7 @@ Router.map(function () {
     Example:
       this.route('home', {path: '/'});
   */
-  this.route('home', {path: '/'});
+  this.route('upload', {path: '/'});
+  this.route('catalogue', {path: '/catalogue'});
+  this.route('settings', {path: '/settings'});
 });

@@ -1,10 +1,9 @@
 /*****************************************************************************/
-/* MasterLayout: Style */
+/* Catalogue: Style */
 /*****************************************************************************/
-#popOut {
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100px;
-	height: 100%;
+.uk-panel-teaser .image {
+	height: 20vh;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-origin: center center;
 }

@@ -14,7 +14,9 @@ npm-container
 reactive-dict
 sacha:spin
 percolate:velocityjs
-pwldp:uikit-2
 meteorhacks:npm
 chrismbeckett:toastr
+richsilv:uikit-2
+matb33:collection-hooks
+zimme:iron-router-active
 

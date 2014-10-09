@@ -16,6 +16,7 @@ deps@1.0.4
 ejson@1.0.3
 fastclick@1.0.0
 follower-livedata@1.0.1
+fourseven:scss@0.9.5
 geojson-utils@1.0.0
 html-tools@1.0.1
 htmljs@1.0.1
@@ -30,6 +31,7 @@ jquery@1.0.0
 json@1.0.0
 livedata@1.0.10
 logging@1.0.3
+matb33:collection-hooks@0.7.6
 meteor-platform@1.1.1
 meteor@1.1.1
 meteorhacks:async@1.0.0
@@ -42,12 +44,12 @@ npm-container@1.0.0
 observe-sequence@1.0.2
 ordered-dict@1.0.0
 percolate:velocityjs@1.0.0
-pwldp:uikit-2@1.0.1
 random@1.0.0
 reactive-dict@1.0.3
 reactive-var@1.0.2
 reload@1.1.0
 retry@1.0.0
+richsilv:uikit-2@0.0.0
 routepolicy@1.0.1
 sacha:spin@2.0.4
 session@1.0.2
@@ -60,3 +62,4 @@ underscore@1.0.0
 url@1.0.0
 webapp-hashing@1.0.0
 webapp@1.1.2
+zimme:iron-router-active@0.2.2

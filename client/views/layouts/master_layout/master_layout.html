@@ -1,3 +1,18 @@
 <template name="MasterLayout">
-  {{> yield}}
+	<div id="sidebar" class="uk-offcanvas">
+	    <div class="uk-offcanvas-bar">
+	    	<ul class="uk-nav uk-nav-offcanvas">
+	    		<li class="uk-nav-divider"></li>
+	    	    <li class="{{ isActiveRoute 'upload' 'uk-active' }}"><a href="/"><i class="uk-icon-picture-o uk-icon-medium"> </i> Add Images</a></li>
+	    		<li class="uk-nav-divider"></li>
+	    	    <li class="{{ isActiveRoute 'catalogue' 'uk-active' }}"><a href="/catalogue"><i class="uk-icon-book uk-icon-medium"> </i> Catalogue</a></li>
+	    		<li class="uk-nav-divider"></li>
+	    	    <li class="{{ isActiveRoute 'settings' 'uk-active' }}"><a href="/settings"><i class="uk-icon-cog uk-icon-medium"> </i> Settings</a></li>
+	    		<li class="uk-nav-divider"></li>
+	    	</ul>
+	    </div>
+	</div>
+	<div id="popOut">
+	</div>
+  	{{> yield}}
 </template>

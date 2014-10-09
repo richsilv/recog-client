@@ -1,4 +1,4 @@
-HomeController = RouteController.extend({
+UploadController = RouteController.extend({
 	routeDict: new ReactiveDict(),
 
 	waitOn: function() {},

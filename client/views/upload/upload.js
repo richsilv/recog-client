@@ -1,7 +1,7 @@
 /*****************************************************************************/
 /* Home: Event Handlers and Helpers */
 /*****************************************************************************/
-Template.Home.events({
+Template.Upload.events({
   /*
    * Example: 
    *  'click .selector': function (e, tmpl) {
@@ -10,7 +10,7 @@ Template.Home.events({
    */
 });
 
-Template.Home.helpers({
+Template.Upload.helpers({
   /*
    * Example: 
    *  items: function () {
@@ -93,14 +93,6 @@ Template.imageItem.events({
 /*****************************************************************************/
 /* Home: Lifecycle Hooks */
 /*****************************************************************************/
-Template.Home.created = function () {
-};
-
-Template.Home.rendered = function () {
-};
-
-Template.Home.destroyed = function () {
-};
 
 Template.imageItem.rendered = function() {
   var image = this.find('img');

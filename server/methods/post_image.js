@@ -14,9 +14,9 @@ Meteor.methods({
      *
      */
     '/app/post_image': function(image) {
-    	var pastec = Control.findOne({
-		    key: 'pastec'
-		});
+        var pastec = Control.findOne({
+            key: 'pastec'
+        });
         console.log("Attempting to add image (" + image.title + " by " + image.artist + ")...");
         var fut = new Future();
         if (!pastec || !pastec.connection) return new Meteor.Error(500, 'Not connected to Pastec server');
@@ -38,6 +38,14 @@ Meteor.methods({
                             fut.throw(err);
                             throw err;
                         } else {
+                            HTTP.post(pastec.serverUrl + '/index/io', {
+                                data: {
+                                    "type": "WRITE",
+                                    "index_path": "index.dat"
+                                }
+                            }, function(err, res) {
+                                console.log(err, res);
+                            });
                             console.log("Image posting completed with result", res.content);
                             var responseObject = JSON.parse(res.content);
                             if (responseObject.type === 'IMAGE_ADDED') Images.insert(image);
