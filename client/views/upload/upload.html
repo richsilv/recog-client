@@ -24,7 +24,7 @@
 		<div class="uk-panel uk-panel-box {{#if connection}}uk-panel-box-primary{{else}}uk-panel-box-secondary{{/if}}">
 		    <div class="uk-panel-badge uk-badge {{#if connection}}uk-badge-success{{else}}uk-badge-danger{{/if}}">{{#if connection}}Connected{{else}}Disconnected{{/if}}</div>
 		    <h3 class="uk-panel-title"><i class="uk-icon-exchange"></i> Pastec Status</h3>
-		    <p>Connection to server at {{serverUrl}} is {{#if connection}}UP{{else}}DOWN{{/if}}.</p>
+		    <p>Connection to server at <strong>{{serverUrl}}</strong> is <strong>{{#if connection}}UP{{else}}DOWN{{/if}}</strong>.</p>
 		</div>
 	</div>
 </template>

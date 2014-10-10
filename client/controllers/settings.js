@@ -3,6 +3,9 @@ SettingsController = RouteController.extend({
   },
 
   data: function () {
+  	return {
+  		pastecServers: Pastec.find()
+  	}
   },
 
   action: function () {

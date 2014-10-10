@@ -1,6 +1,8 @@
 /*****************************************************************************/
 /* Catalogue: Event Handlers and Helpers */
 /*****************************************************************************/
+var currentImage = new ReactiveVar();
+
 Template.Catalogue.events({
   /*
    * Example: 
@@ -22,8 +24,19 @@ Template.Catalogue.helpers({
 Template.imagePanel.events({
   'click .uk-close': function() {
     Images.remove({_id: this._id});
+  },
+  'click .image': function() {
+    currentImage.set(this.url);
+    console.log(this.url);
+    $.UIkit.modal('#image-modal').show();
   }
-})
+});
+
+Template.imageModal.helpers({
+  image: function() {
+    return currentImage.get();
+  }
+});
 
 /*****************************************************************************/
 /* Catalogue: Lifecycle Hooks */

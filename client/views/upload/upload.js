@@ -19,7 +19,7 @@ Template.Upload.helpers({
    */
    notReady: function() {
     var controller = Router.current();
-    return !controller.routeDict.get('ready') || !LocalImages.find({width: {$exists: true}}).count();
+    return (!controller.routeDict.get('ready') || !LocalImages.find({width: {$exists: true}}).count()) && controller.params.url;
    }
 });
 
@@ -61,27 +61,36 @@ Template.imageItem.events({
           url: this.url,
           index: Images.nextIndex(),
           title: template.$('.image-title').val(),
-          artist: template.$('.image-artist').val()
+          artist: template.$('.image-artist').val(),
+          width: this.width,
+          height: this.height
         };
     Meteor.call('/app/post_image', imageDoc, function(err, res) {
       if (!err && res) {
+        var notification = {
+          pos: 'top-right',
+          timeout: 3000,
+          message: 'Unknown response.',
+          status: 'info'
+        };
         switch(res.type) {
           case "IMAGE_ADDED":
-            toastr.success('Image Added!', imageDoc.title + ' by ' + imageDoc.artist + ' successfully added.')
+            _.extend(notification, {message: imageDoc.title + ' by ' + imageDoc.artist + ' successfully added.', status: 'success'});
             break;
           case "IMAGE_SIZE_TOO_BIG":
-            toastr.error('Image Too Small!.', 'Sorry, that image is too small to add.')
+            _.extend(notification, {message: 'That image is too small to add!', status: 'error'});
             break;
           case "IMAGE_SIZE_TOO_SMALL":
-            toastr.error('Image Too Large!.', 'Sorry, that image is too large to add.')
+            _.extend(notification, {message: 'That image is too large to add!', status: 'error'});
             break;
         }
+        $.UIkit.notify(notification);
         template.$('li').velocity(
           "slideUp", {
             duration: 1500,
             delay: 500, 
             complete: function() {
-              controller.routeDict.set('data', _.without(controller.routeDict.get('data'), imageDoc.url));
+              LocalImages.remove({_id: this._id});
             }
         });
       }

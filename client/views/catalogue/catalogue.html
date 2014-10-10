@@ -1,22 +1,32 @@
 <template name="Catalogue">
 	<section class="uk-container uk-container-center uk-margin-large-top">
-	  	<section class="uk-grid" data-uk-grid-match data-uk-grid-margin>
+		<section class="uk-flex">
+	  	<!-- <section class="uk-grid" data-uk-grid-match data-uk-grid-margin> -->
 	  		{{#each images}}
 	  			{{> imagePanel}}
 	  		{{/each}}
 	  	</section>
   	</section>
+  	{{> imageModal}}
 </template>
 
 <template name="imagePanel">
-	<div class="uk-width-1-5">
-		<div class="uk-panel uk-panel-box uk-height-1-1">
-			<h3 class="uk-panel-title">{{title}} by {{artist}}</h3>
-		    <div class="uk-panel-teaser">
-		   		<div class="image" style="background-image: url('{{url}}')"></div>
-		    </div>
-		    <span class="uk-text-small">{{width}} x {{height}}</span>
-		    <a href="" class="uk-close uk-float-right"></a>
-		</div>
+	<div class="uk-panel uk-panel-box">
+		<h3 class="uk-panel-title">{{title}} by {{artist}}</h3>
+	    <div class="uk-panel-teaser">
+	   		<div class="image" style="background-image: url('{{url}}')"></div>
+	    </div>
+	    <div class="uk-text-muted">Image number: {{index}}</div>
+	    <span class="uk-text-small">{{width}} x {{height}}</span>
+	    <a href="" class="uk-close uk-float-right"></a>
+	</div>
+</template>
+
+<template name="imageModal">
+	<div id="image-modal" class="uk-modal">
+	    <div class="uk-modal-dialog">
+	        <a class="uk-modal-close uk-close"></a>
+	        <img src="{{image}}">
+	    </div>
 	</div>
 </template>

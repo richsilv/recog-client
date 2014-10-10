@@ -8,7 +8,6 @@ blaze@2.0.1
 boilerplate-generator@1.0.0
 callback-hook@1.0.0
 check@1.0.1
-chrismbeckett:toastr@1.0.2
 ctl-helper@1.0.3
 ctl@1.0.1
 ddp@1.0.9
@@ -16,7 +15,7 @@ deps@1.0.4
 ejson@1.0.3
 fastclick@1.0.0
 follower-livedata@1.0.1
-fourseven:scss@0.9.5
+fourseven:scss@0.9.6
 geojson-utils@1.0.0
 html-tools@1.0.1
 htmljs@1.0.1
@@ -49,7 +48,7 @@ reactive-dict@1.0.3
 reactive-var@1.0.2
 reload@1.1.0
 retry@1.0.0
-richsilv:uikit-2@0.0.0
+richsilv:uikit-sass@1.0.0
 routepolicy@1.0.1
 sacha:spin@2.0.4
 session@1.0.2

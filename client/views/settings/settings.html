@@ -1,3 +1,57 @@
 <template name="Settings">
-  client/views/settings/settings.html
+	<section class="uk-container uk-container-center uk-margin-large-top">
+		<button class="uk-button uk-button-primary uk-display-block uk-container-center uk-width-1-4" type="button">Add a Pastec server</button>
+		<div class="uk-width-medium-2-3 uk-width-large-2-3 uk-container-center uk-margin-top">
+			{{#each pastecServers}}
+				{{> pastec_details}}
+			{{/each}}
+			<a href="" class="uk-placeholder uk-display-block"></a>
+		</div>
+  	</section>
+
+  	<div id="add-modal" class="uk-modal">
+	  	{{> modal_contents errorState}}
+	</div>
+</template>
+
+<template name="pastec_details">
+	<article class="pastec-item uk-comment {{#if current}}uk-comment-primary{{/if}}">
+	    <header class="uk-comment-header">
+	        <img class="uk-comment-avatar" src="" alt="">
+	        <h4 class="uk-comment-title">{{serverUrl}}
+	        	<div class="uk-badge uk-float-right {{#if connection}}uk-badge-success{{else}}uk-badge-danger{{/if}}">
+	        		{{#if connection}}
+	        			Connected
+	        		{{else}}
+	        			Disconnected
+	        		{{/if}}
+	        	</div>
+	        	{{#if current}}<div class="uk-badge uk-float-right">Active</div>{{/if}}
+	        </h4>
+	        <div class="uk-comment-meta">{{description}}</div>
+	        <a href="" class="uk-close uk-float-right"></a>
+	    </header>
+	</article>
+</template>
+
+<template name="modal_contents">
+	<div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <form class="uk-form uk-form-horizontal">
+
+		    <fieldset data-uk-margin>
+		        <legend>Add a New Pastec Server</legend>
+		        <label class="uk-form-label">URL</label>
+		        <div class="uk-form-row">
+		        	<input type="url" placeholder="The URL of the new server" class="uk-form-large uk-width-1-1 {{#if urlErr}}uk-form-danger{{/if}}">
+		        </div>
+		        <label class="uk-form-label">Description</label>
+		        <div class="uk-form-row">
+		        	<input type="text" placeholder="A description for this Pastec" class="uk-width-1-1 {{#if descriptionErr}}uk-form-danger{{/if}}">
+		        </div>
+		        <div class="uk-form-row"><button class="uk-button uk-button-primary uk-width-1-2 uk-float-right" type="button">Add Server</button></div>
+		    </fieldset>
+
+		</form>
+    </div>
 </template>

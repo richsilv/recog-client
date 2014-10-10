@@ -15,8 +15,8 @@ reactive-dict
 sacha:spin
 percolate:velocityjs
 meteorhacks:npm
-chrismbeckett:toastr
-richsilv:uikit-2
 matb33:collection-hooks
 zimme:iron-router-active
+richsilv:uikit-sass
+reactive-var
 

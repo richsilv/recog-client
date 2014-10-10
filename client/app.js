@@ -6,7 +6,7 @@ _.extend(App, {
 
 App.helpers = {
   pastec: function() {
-    return Control.findOne({key: 'pastec'});
+    return Pastec.findOne({current: true});
   },
 
   not: function(bool) {

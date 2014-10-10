@@ -1,8 +1,21 @@
 /*****************************************************************************/
 /* Catalogue: Style */
 /*****************************************************************************/
+.uk-flex {
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: space-around;
+	align-content: space-between;
+
+	.uk-panel {
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+}
+
 .uk-panel-teaser .image {
 	height: 20vh;
+	min-height: 200px;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-origin: center center;

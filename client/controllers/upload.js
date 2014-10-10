@@ -5,7 +5,7 @@ UploadController = RouteController.extend({
 
 	data: function() {
 		return {
-			tags: this.routeDict.get('data'),
+			tags: LocalImages.find(),
 			url: this.params.url
 		};
 	},
@@ -15,6 +15,7 @@ UploadController = RouteController.extend({
 		_this.routeDict.set('ready', true);
 		if (_this.params.url) {
 			_this.routeDict.set('ready', false);
+			_this.routeDict.set('url', _this.params.url);
 			Meteor.call('/app/get_u_r_l', decodeURI(_this.params.url), function(err, res) {
 				_this.routeDict.set('ready', true);
 				if (!err) {
@@ -24,6 +25,8 @@ UploadController = RouteController.extend({
 				}	
 				else throw err;
 			});
+		} else if (_this.routeDict.get('url')) {
+			_this.redirect('/?url=' + _this.routeDict.get('url'));
 		} else {
 			_this.routeDict.set('data', []);
 		}

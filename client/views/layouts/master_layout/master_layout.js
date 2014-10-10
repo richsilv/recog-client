@@ -9,10 +9,10 @@ Template.MasterLayout.events({
    *  }
    */
   'mouseover #popOut': function(event) {
-    $.UIkit.offcanvas.offcanvas.show('#sidebar');
+    $.UIkit.offcanvas.show('#sidebar');
   },
   'mouseleave .uk-offcanvas-bar-show': function(event) {
-    $.UIkit.offcanvas.offcanvas.hide();
+    $.UIkit.offcanvas.hide();
   }
 });
 
