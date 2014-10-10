@@ -17,4 +17,5 @@ Router.map(function () {
   this.route('upload', {path: '/'});
   this.route('catalogue', {path: '/catalogue'});
   this.route('settings', {path: '/settings'});
+  this.route('testimage', {path: '/testimage'});
 });

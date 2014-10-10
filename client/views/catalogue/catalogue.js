@@ -27,7 +27,6 @@ Template.imagePanel.events({
   },
   'click .image': function() {
     currentImage.set(this.url);
-    console.log(this.url);
     $.UIkit.modal('#image-modal').show();
   }
 });

@@ -8,5 +8,5 @@ Pastec = new Meteor.Collection('pastec');
  */
 
 Pastec.current = function() {
-	return Pastec.find({current: true});
+	return Pastec.findOne({current: true});
 };

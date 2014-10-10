@@ -20,7 +20,7 @@ UploadController = RouteController.extend({
 				_this.routeDict.set('ready', true);
 				if (!err) {
 					_.each(res, function(thisUrl) {
-						if (!Images.find({url: thisUrl}).count()) LocalImages.insert({url: thisUrl});
+						if (!Images.find({url: thisUrl}).count() && !LocalImages.find({url: thisUrl}).count()) LocalImages.insert({url: thisUrl});
 					});
 				}	
 				else throw err;

@@ -91,6 +91,7 @@ Template.imageItem.events({
             delay: 500, 
             complete: function() {
               LocalImages.remove({_id: this._id});
+              $(template.firstNode).next().find('.image-title').focus();
             }
         });
       }

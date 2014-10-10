@@ -15,6 +15,9 @@ Meteor.methods({
 	 *
 	 */
 	'/app/get_u_r_l': function(url) {
+		// if the url is of an image, just return the same url
+		if (url.slice(-4) === '.jpg') return [url];
+		// otherwise, crawl from that point
 		var fut = new Future(),
 			results = [],
 			c = new Crawler({

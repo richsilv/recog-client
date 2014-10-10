@@ -1,0 +1,29 @@
+<template name="Testimage">
+	<section class="uk-height-1-1 uk-text-center">
+	    <div class="uk-height-1-1 uk-vertical-align uk-container-center">
+	        <div class="uk-vertical-align-middle">
+	            <div class="">
+	            	<form class="uk-form">
+					    <fieldset data-uk-margin>
+					        <legend>URL for the image you'd like to test</legend>
+					        <input type="url" placeholder="Image URL" class="uk-form-large uk-form-width-large">
+					        <button type="button" class="uk-button uk-button-large uk-button-primary">Go</button>
+				        </fieldset>
+			        </form>
+	            </div>
+	        </div>
+	    </div>
+    </section>
+
+    {{> test_result currentImage}}
+</template>
+
+<template name="test_result">
+	<div id="test-modal" class="uk-modal">
+	    <div class="uk-modal-dialog">
+	        <a class="uk-modal-close uk-close"></a>
+	        <h3><strong>{{title}}</strong> by <strong>{{artist}}</strong></h3>
+	        <img src="{{url}}">
+	    </div>
+	</div>
+</template>
