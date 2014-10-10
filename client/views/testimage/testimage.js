@@ -16,13 +16,13 @@ Template.Testimage.events({
         Meteor.call('/app/test_image', url, function(err, res) {
             if (err) $.UIkit.notify({
                 message: err.toString(),
-                timeout: 300,
+                timeout: 3000,
                 pos: 'top-right',
                 status: 'danger'
             });
             else if (res.type !== "SEARCH_RESULTS") $.UIkit.notify({
                 message: res.type,
-                timeout: 300,
+                timeout: 3000,
                 pos: 'top-right',
                 status: 'warning'
             });
@@ -32,9 +32,9 @@ Template.Testimage.events({
                 });
                 currentImage.set(image);
                 $.UIkit.modal('#test-modal').show();
-            } else UIkit.notify({
+            } else $.UIkit.notify({
                 message: "No results returned",
-                timeout: 300,
+                timeout: 3000,
                 pos: 'top-right',
                 status: 'warning'
             });
