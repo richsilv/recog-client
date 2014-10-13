@@ -84,7 +84,7 @@ function getEnabledSources() {;
     return {
         url: true,
         file: !Meteor.isCordova,
-        camera: true //!!navigator.camera
+        camera: !!navigator.camera
     }
 }
 
