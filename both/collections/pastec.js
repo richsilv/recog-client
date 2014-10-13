@@ -10,3 +10,8 @@ Pastec = new Meteor.Collection('pastec');
 Pastec.current = function() {
 	return Pastec.findOne({current: true});
 };
+
+Pastec._id = function() {
+	var pastec = Pastec.findOne({current: true});
+	return pastec && pastec._id;
+};

@@ -7,15 +7,15 @@
 
 Control.allow({
   insert: function(userId, doc) {
-    return true;
+    return false;
   },
 
   update: function(userId, doc, fieldNames, modifier) {
-    return true;
+    return false;
   },
 
   remove: function(userId, doc) {
-    return true;
+    return false;
   }
 });
 
@@ -34,43 +34,5 @@ Control.deny({
 });
 
 Meteor.startup(function() {
-  Meteor.setInterval(function() {
-    var pastec = Control.findOne({
-      key: 'pastec'
-    });
-    pastec && HTTP.post(pastec.serverUrl, {
-      data: {
-        type: "PING"
-      }
-    }, function(err, res) {
-      if (!err && res.statusCode === 200) {
-        var content = JSON.parse(res.content);
-        if (content && content.type === "PONG") {
-          Control.update({
-            key: 'pastec'
-          }, {
-            $set: {
-              connection: true
-            }
-          });
-        } else {
-          Control.update({
-            key: 'pastec'
-          }, {
-            $set: {
-              connection: false
-            }
-          });
-        }
-      } else {
-        Control.update({
-          key: 'pastec'
-        }, {
-          $set: {
-            connection: false
-          }
-        });
-      }
-    });
-  }, 5000);
+  if (!Control.findOne({key: "dbIdentity"})) Control.insert({key: "dbIdentity"});
 });

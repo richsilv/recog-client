@@ -23,10 +23,17 @@
 </template>
 
 <template name="imageModal">
+	{{#with image}}
 	<div id="image-modal" class="uk-modal">
 	    <div class="uk-modal-dialog">
-	        <a class="uk-modal-close uk-close"></a>
-	        <img src="{{image}}">
+	        <form class="uk-form">
+			    <fieldset>
+			        <div class="uk-form-row"><input class="uk-width-1-1 uk-form-large" type="text" id="image-title" value="{{title}}" placeholder=""></div>
+			        <div class="uk-form-row"><input class="uk-width-1-1 uk-form-large" type="text" id="image-artist" value="{{artist}}" placeholder=""></div>
+			    </fieldset>
+			</form>
+	        <img src="{{url}}" class="uk-margin-top">
 	    </div>
 	</div>
+	{{/with}}
 </template>

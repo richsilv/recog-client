@@ -2,7 +2,7 @@
 /* TestImage Methods */
 /*****************************************************************************/
 var Future = Meteor.npmRequire('fibers/future'),
-    http = Meteor.npmRequire('http');
+    request = Meteor.npmRequire('request');
 
 Meteor.methods({
  /*
@@ -19,14 +19,14 @@ Meteor.methods({
         if (!pastec || !pastec.connection) return new Meteor.Error(500, 'Not connected to Pastec server');
 
         console.log("Requesting image from " + url);
-        var req = http.get(url, Meteor.bindEnvironment(function(res) {
-            var buf = new Buffer("", "binary");
-            res.on('data', Meteor.bindEnvironment(function(chunk) {
+        var buf = new Buffer("", "binary"),
+            req = request.get(url, Meteor.bindEnvironment(function(error, res, body) {}))
+            .on('data', Meteor.bindEnvironment(function(chunk) {
                 buf = Buffer.concat([buf, chunk]);
-            }));
-            res.on('end', Meteor.bindEnvironment(function() {
+            }))
+            .on('end', Meteor.bindEnvironment(function() {
                 console.log("Posting image data to Pastec");
-                if (res.statusCode === 200 && buf.length) {
+                if (buf.length) {
                     HTTP.post(pastec.serverUrl + '/index/searcher', {
                         content: buf
                     }, function(err, res) {
@@ -41,8 +41,8 @@ Meteor.methods({
                         }
                     });
                 }
+                else fut.return({});
             }));
-        }));
         this.unblock();
         return fut.wait();
     }

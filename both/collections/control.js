@@ -6,3 +6,8 @@ Control = new Meteor.Collection('control');
  *    return Control.find({is_public: true});
  *  }
  */
+
+Control._id = function() {
+	var dbIdentity = Control.findOne({key: 'dbIdentity'});
+	return dbIdentity && dbIdentity._id;
+}

@@ -63,7 +63,9 @@ Template.imageItem.events({
           title: template.$('.image-title').val(),
           artist: template.$('.image-artist').val(),
           width: this.width,
-          height: this.height
+          height: this.height,
+          pastec: Pastec._id(),
+          host: Control._id()
         };
     Meteor.call('/app/post_image', imageDoc, function(err, res) {
       if (!err && res) {
@@ -90,7 +92,7 @@ Template.imageItem.events({
             duration: 1500,
             delay: 500, 
             complete: function() {
-              LocalImages.remove({_id: this._id});
+              LocalImages.remove({url: this.url});
               $(template.firstNode).next().find('.image-title').focus();
             }
         });

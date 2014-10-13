@@ -13,6 +13,12 @@ Template.MasterLayout.events({
   },
   'mouseleave .uk-offcanvas-bar-show': function(event) {
     $.UIkit.offcanvas.hide();
+  },
+  'click [data-item-type="link"]': function() {
+    $.UIkit.offcanvas.hide();
+  },
+  'swipeRight': function(e) {
+    $.UIkit.offcanvas.show('#sidebar');
   }
 });
 

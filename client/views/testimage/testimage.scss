@@ -1,0 +1,9 @@
+/*****************************************************************************/
+/* Testimage: Style */
+/*****************************************************************************/
+@import "packages/richsilv:uikit-sass/assets/scss/uikit-variables";
+
+.testing {
+	background-color: desaturate(darken($button-primary-background, 10%),25%) !important;
+	color: lightgrey !important;
+}

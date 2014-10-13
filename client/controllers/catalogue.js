@@ -1,14 +1,18 @@
 CatalogueController = RouteController.extend({
-  waitOn: function () {
+  waitOn: function() {},
+
+  data: function() {
+    return {
+      images: Images.find({
+        pastec: Pastec._id(),
+        host: Control._id()
+      }, {
+        sort: {index: 1}
+      })
+    }
   },
 
-  data: function () {
-  	return {
-  		images: Images.find()
-  	}
-  },
-
-  action: function () {
+  action: function() {
     this.render();
   }
 });

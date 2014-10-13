@@ -11,7 +11,9 @@ UploadController = RouteController.extend({
 	},
 
 	onBeforeAction: function() {
-		var _this = this;
+		var _this = this,
+			pastec = Pastec._id(),
+			host = Control._id();
 		_this.routeDict.set('ready', true);
 		if (_this.params.url) {
 			_this.routeDict.set('ready', false);
@@ -20,10 +22,17 @@ UploadController = RouteController.extend({
 				_this.routeDict.set('ready', true);
 				if (!err) {
 					_.each(res, function(thisUrl) {
-						if (!Images.find({url: thisUrl}).count() && !LocalImages.find({url: thisUrl}).count()) LocalImages.insert({url: thisUrl});
+						if (!Images.find({
+							url: thisUrl,
+							host: host,
+							pastec: pastec
+						}).count() && !LocalImages.find({
+							url: thisUrl
+						}).count()) LocalImages.insert({
+							url: thisUrl
+						});
 					});
-				}	
-				else throw err;
+				} else throw err;
 			});
 		} else if (_this.routeDict.get('url')) {
 			_this.redirect('/?url=' + _this.routeDict.get('url'));

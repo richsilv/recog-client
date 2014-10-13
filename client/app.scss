@@ -2,3 +2,80 @@
 /* Global CSS Styles */
 /*****************************************************************************/
 @import "packages/richsilv:uikit-sass/assets/scss/uikit";
+
+.uk-catwalk {
+	max-width: $utility-container-large-max-width;
+	@media screen and (max-width: $breakpoint-large) {
+		max-width: 100%
+	}
+}
+
+$icon-button-large-width: 70px;
+$icon-button-large-height: $icon-button-large-width;
+$icon-button-disabled-background: $button-disabled-background;
+$icon-button-disabled-color: $button-disabled-color;
+
+.uk-icon-button-large {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    width: $icon-button-large-width;
+    height: $icon-button-large-height;
+    border-radius: $icon-button-border-radius;
+    background: $icon-button-background;
+    line-height: $icon-button-large-height;
+    color: $icon-button-color;
+    font-size: $icon-button-font-size;
+    text-align: center;
+    @include hook-icon-button();
+
+    &:hover, &:focus {
+	    background-color: $icon-button-hover-background;
+	    color: $icon-button-hover-color;
+	    text-decoration: none;
+	    /* 2 */
+	    outline: none;
+	    @include hook-icon-button-hover();    	
+    }
+
+    &:active {
+	    background-color: $icon-button-active-background;
+	    color: $icon-button-active-color;
+	    @include hook-icon-button-active();
+    }
+}
+
+.uk-list-icons {
+
+	margin-right: $icon-button-font-size / 2;
+	padding-left: 0;
+
+	li {
+		@extend .uk-margin-left;
+		display: inline;
+
+		i, button, a  {
+			@extend .uk-icon-button-large;
+			@extend .uk-icon-medium;
+			&:before {
+				vertical-align: -10%;
+			}
+
+			&.uk-active {
+			    background-color: $icon-button-active-background;
+			    color: $icon-button-active-color;
+			    @include hook-icon-button-active();				
+			}
+
+			&.uk-disabled {
+			    background-color: $icon-button-disabled-background;
+			    color: $icon-button-disabled-color;
+			}
+		}
+	}
+}
+
+.uk-big-button {
+	padding: $button-padding-horizontal;
+	border-radius: 2px
+}

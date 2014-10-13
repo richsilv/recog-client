@@ -2,6 +2,8 @@
 /* GetURL Methods */
 /*****************************************************************************/
 
+var MAX_IMAGES = 250;
+
 var urlRegex = /<a[^>]*>([\s\S]*?)<\/a>/g,
 	Crawler = Meteor.npmRequire('crawler').Crawler,
 	Future = Meteor.npmRequire('fibers/future');
@@ -20,16 +22,20 @@ Meteor.methods({
 		// otherwise, crawl from that point
 		var fut = new Future(),
 			results = [],
+			count = 0;
 			c = new Crawler({
 				maxConnections: 10,
 				callback: function(error,result,$) {
 				    // $ is a jQuery instance scoped to the server-side DOM of the page
-				    if (error || !$) {
+				    if (error || !$ || count > MAX_IMAGES) {
 				    	console.log(error);
 				    	return null;
 				    }
 				    $("img").each(function(index,img) {
-				    	if (results.indexOf(img.src) === -1) results.push(img.src);
+				    	if (results.indexOf(img.src) === -1) {
+				    		results.push(img.src);
+				    		count++;
+				    	}
 				    });
 				    $("a").each(function(index,a) {
 				    	if (a.href.indexOf(url) > -1) c.queue(a.href);
