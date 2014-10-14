@@ -1,7 +1,9 @@
 /*****************************************************************************/
 /* Testimage: Event Handlers and Helpersss .js*/
 /*****************************************************************************/
-var currentImage = new ReactiveVar();
+var currentImage = new ReactiveVar(),
+    currentArtist = new ReactiveVar(),
+    breadcrumb = new ReactiveVar('artwork');
 
 Template.Testimage.events({
     /*
@@ -23,9 +25,6 @@ Template.Testimage.helpers({
      *    return Items.find();
      *  }
      */
-    currentImage: function() {
-        return currentImage.get();
-    },
 
     activeLink: function(name) {
         var _this = Template.instance();
@@ -42,7 +41,6 @@ Template.urlTest.events({
     'click [data-button-type="test-link"], keyup input': function(event, template) {
         var url = template.$('input').val();
         if ((event.keyCode && event.keyCode !== 13) || !url) return false;
-        console.log(url);
         Meteor.call('/app/test_image', url, displayResults);
     }
 });
@@ -67,6 +65,26 @@ Template.cameraTest.events({
             });
     }
 })
+
+Template.test_result.helpers({
+    currentImage: function() {
+        return currentImage.get();
+    },
+
+    currentArtist: function() {
+        return currentArtist.get();
+    },
+
+    breadcrumb: function(option) {
+        return breadcrumb.get() === option;
+    }
+});
+
+Template.test_result.events({
+    'click .uk-breadcrumb a': function (event) {
+        breadcrumb.set($(event.currentTarget).data('breadcrumb'));
+    }
+});
 
 /*****************************************************************************/
 /* Testimage: Lifecycle Hooks */
@@ -107,6 +125,25 @@ function displayResults(err, res) {
             index: res.image_ids[0]
         });
         if (image) {
+            Meteor.call('/app/wiki_search/opensearch', image.artist, function(err, res) {
+                currentArtist.set({});
+                if (!err && res && res.SearchSuggestion && res.SearchSuggestion.Section && res.SearchSuggestion.Section[0].Item && res.SearchSuggestion.Section[0].Item.length) {
+                    res.SearchSuggestion.Section[0].Item.every(function(data) {
+                        var thisDescription = data['Description'][0]._.toLowerCase();
+                        console.log(thisDescription);
+                        if (thisDescription.indexOf('artist') > -1 || thisDescription.indexOf('painter') > -1) {
+                            currentArtist.set({
+                                text: data['Text'][0]._,
+                                image: data['Image'][0].$,
+                                description: data['Description'][0]._,
+                                url: data['Url'][0]._
+                            });
+                            return false;
+                        }
+                        else return true;
+                    });
+                }
+            });
             currentImage.set(image);
             $.UIkit.modal('#test-modal').show();
         }

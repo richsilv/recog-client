@@ -2,5 +2,6 @@
   "crawler": "0.2.7",
   "request": "2.45.0",
   "wikipedia-js": "0.0.6",
-  "atob": "1.1.2"
+  "atob": "1.1.2",
+  "xml2js": "0.4.4"
 }
