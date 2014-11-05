@@ -2,7 +2,8 @@
 /* GetURL Methods */
 /*****************************************************************************/
 
-var MAX_IMAGES = 250;
+var MAX_IMAGES = 250,
+	TIMEOUT = 100000;
 
 var urlRegex = /<a[^>]*>([\s\S]*?)<\/a>/g,
 	Crawler = Meteor.npmRequire('crawler').Crawler,
@@ -22,12 +23,13 @@ Meteor.methods({
 		// otherwise, crawl from that point
 		var fut = new Future(),
 			results = [],
-			count = 0;
+			count = 0,
+			timeout = new Date().getTime() + TIMEOUT;
 			c = new Crawler({
 				maxConnections: 10,
 				callback: function(error,result,$) {
 				    // $ is a jQuery instance scoped to the server-side DOM of the page
-				    if (error || !$ || count > MAX_IMAGES) {
+				    if (error || !$ || count > MAX_IMAGES || new Date() > timeout) {
 				    	console.log(error);
 				    	return null;
 				    }
