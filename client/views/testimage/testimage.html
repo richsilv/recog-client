@@ -18,7 +18,7 @@
 	    </div>
     </section>
 
-    {{> test_result currentImage}}
+    {{> test_result}}
 </template>
 
 <template name="urlTest">
@@ -47,8 +47,34 @@
 	<div id="test-modal" class="uk-modal">
 	    <div class="uk-modal-dialog">
 	        <a class="uk-modal-close uk-close"></a>
-	        <h3><strong>{{title}}</strong> by <strong>{{artist}}</strong></h3>
-	        <img src="{{url}}">
+		        <ul class="uk-breadcrumb">
+			    {{#if breadcrumb 'artwork'}}<li class="uk-active"><span>Artwork</span></li>{{else}}<li><a href="" data-breadcrumb="artwork">Artwork</a></li>{{/if}}
+			    {{#if breadcrumb 'artist'}}
+			    	<li class="uk-active"><span>Artist</span></li>
+			    {{else}}
+			    	{{#if currentArtist.text}}
+			    	<li><a href="" data-breadcrumb="artist">Artist</a></li>
+			    	{{else}}
+			    	<li><span>Artist</span></li>
+			    	{{/if}}
+			    {{/if}}
+				</ul>
+			{{#if breadcrumb "artwork"}}
+				{{#with currentImage}}
+		        <h3><strong>{{title}}</strong> by <strong>{{artist}}</strong></h3>
+		        <img src="{{url}}">
+		        {{/with}}
+	        {{else}}
+	        {{#if breadcrumb "artist"}}
+		        {{#with currentArtist}}
+		        <h2>{{text}}</h2>
+		        <p>
+		        	<img src="{{image.source}}" class="uk-float-right wiki-thumb">
+		        	{{description}}
+		        </p>
+		        <a href="{{url}}">{{text}} on Wikipedia</a>
+		        {{/with}}
+	        {{/if}}{{/if}}
 	    </div>
 	</div>
 </template>

@@ -18,7 +18,7 @@
 		<div class="uk-panel uk-panel-box {{#if connection}}uk-panel-box-primary{{else}}uk-panel-box-secondary{{/if}}">
 		    <div class="uk-panel-badge uk-badge {{#if connection}}uk-badge-success{{else}}uk-badge-danger{{/if}}">{{#if connection}}Connected{{else}}Disconnected{{/if}}</div>
 		    <h3 class="uk-panel-title"><i class="uk-icon-exchange"></i> Pastec Status</h3>
-		    <p>Connection to server at <strong>{{serverUrl}}</strong> is <strong>{{#if connection}}UP{{else}}DOWN{{/if}}</strong>.</p>
+		    <p>Connection to <strong>{{description}}</strong> is <strong>{{#if connection}}UP{{else}}DOWN{{/if}}</strong>.</p>
 		</div>
 	</div>
 	<form class="uk-form uk-width-large-1-2 uk-width-medium-1-2 uk-pull-1-2 uk-margin-top">
@@ -29,7 +29,7 @@
 	</form>
 </template>
 
-<template name="results">
+<!-- <template name="results">
 	{{#if tags}}
 		<ul class="uk-list uk-list-line uk-list-striped">
 			{{#each tags}}
@@ -52,8 +52,8 @@
 			        </figcaption>
 		    	</figure>
 	    	</div>
-	    	<form class="uk-form uk-width-3-5 uk-vertical-align uk-height-1-1">
-	    	    <div class="uk-form-row uk-vertical-align-middle">
+	    	<form class="uk-form uk-width-3-5 uk-vertical-align">
+	    	    <div class="uk-form-row uk-vertical-align-middle uk-width-1-1">
 	    	        <div class="uk-form-controls">
 	    	            <input type="text" placeholder="Title" class="uk-width-2-5 image-title">
 	    	            <input type="text" placeholder="Artist" class="uk-width-2-5 image-artist">
@@ -62,6 +62,44 @@
 				    	</span>
 	    	        </div>
 	    	    </div>
+	    	</form>
+    	</div>
+    </li>
+</template> -->
+
+<template name="results">
+	{{#if tags}}
+		<ul class="uk-list uk-list-line uk-list-striped">
+			{{#each tags}}
+				{{> imageItem}}
+			{{/each}}
+		</ul>	
+	{{/if}}
+</template>
+
+<template name="imageItem">
+	<li class="{{#unless width}}uk-hidden{{/unless}}">
+		<div class="uk-flex upload-flex">
+			<div class="uk-width-2-5">
+				<figure class="uk-thumbnail thumbnail">
+			        <img class="uk-container-center" src="{{url}}" alt="">
+			        <figcaption class="uk-thumbnail-caption uk-text-break">
+				        {{url}}
+				        <br>
+				        <span class="uk-text-small dimensions">{{width}} x {{height}}</span>
+			        </figcaption>
+		    	</figure>
+	    	</div>
+	    	<form class="uk-form uk-width-3-5">
+		    	    <div class="uk-form-row uk-width-1-1">
+		    	        <div class="uk-form-controls">
+		    	            <input type="text" placeholder="Title" class="uk-width-2-5 uk-margin-small-left image-title">
+		    	            <input type="text" placeholder="Artist" class="uk-width-2-5 image-artist">
+		    	            <span class="uk-width-1-5">
+						    	<button class="uk-button uk-button-primary" type="button" disabled={{not pastec.connection}}>Add</button>
+					    	</span>
+		    	        </div>
+		    	    </div>
 	    	</form>
     	</div>
     </li>
