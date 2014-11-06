@@ -6,7 +6,7 @@ UploadController = RouteController.extend({
 	data: function() {
 		return {
 			tags: LocalImages.find(),
-			url: this.params.url
+			url: this.params.query.url
 		};
 	},
 
@@ -15,10 +15,10 @@ UploadController = RouteController.extend({
 			pastec = Pastec._id(),
 			host = Control._id();
 		_this.routeDict.set('ready', true);
-		if (_this.params.url) {
+		if (_this.params.query.url) {
 			_this.routeDict.set('ready', false);
-			_this.routeDict.set('url', _this.params.url);
-			Meteor.call('/app/get_u_r_l', decodeURI(_this.params.url), function(err, res) {
+			_this.routeDict.set('url', _this.params.query.url);
+			Meteor.call('/app/get_u_r_l', decodeURI(_this.params.query.url), function(err, res) {
 				_this.routeDict.set('ready', true);
 				if (!err) {
 					_.each(res, function(thisUrl) {
@@ -39,6 +39,7 @@ UploadController = RouteController.extend({
 		} else {
 			_this.routeDict.set('data', []);
 		}
+		this.next();
 	}
 
 });

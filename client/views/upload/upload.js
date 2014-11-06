@@ -19,7 +19,7 @@ Template.Upload.helpers({
    */
    notReady: function() {
     var controller = Router.current();
-    return (!controller.routeDict || !controller.routeDict.get('ready') || !LocalImages.find({width: {$exists: true}}).count()) && controller.params.url;
+    return (!controller.routeDict || !controller.routeDict.get('ready') || !LocalImages.find({width: {$exists: true}}).count()) && controller.params.query.url;
    }
 });
 
