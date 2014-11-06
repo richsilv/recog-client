@@ -19,7 +19,7 @@ Template.Upload.helpers({
    */
    notReady: function() {
     var controller = Router.current();
-    return (!controller.routeDict || !controller.routeDict.get('ready') || !LocalImages.find({width: {$exists: true}}).count()) && controller.params.url;
+    return (!controller.state || !controller.state.get('ready') || !LocalImages.find({width: {$exists: true}}).count()) && controller.params.query.url;
    }
 });
 
@@ -31,27 +31,36 @@ Template.sourceEntry.helpers({
 });
 
 Template.sourceEntry.events({
-  'submit .uk-form': function() {
-    LocalImages.remove({});
-    rootUrl = $('input').val();
-    Router.go('/?url=' + encodeURI(rootUrl));
-    return false;
+  'submit .uk-form': function(event) {
+    event.preventDefault();
+    Meteor.call('app/remove_local_images');
+    var rootUrl = $('input').val(),
+        routeController = Router.current();
+    routeController.state.set('ready', false);
+    console.log(rootUrl);
+    Meteor.call('/app/get_u_r_l', rootUrl, function(err, res) {
+      routeController.state.set('ready', true);
+    });
   }
 });
 
 Template.results.helpers({
   tags: function() {
-    return LocalImages.find();
+    return LocalImages.find({}, {limit: 50});
   }
 });
 
 Template.imageItem.events({
   'load': function(event, template) {
-    if (event.target.naturalWidth >= 150 && event.target.naturalHeight >= 150) {
+    if ((event.target.naturalWidth >= 200 && event.target.naturalHeight >= 200) || LocalImages.find().count() === 1) {
       LocalImages.update({_id: this._id}, {$set: {width: event.target.naturalWidth, height: event.target.naturalHeight}});
     } else {
       LocalImages.remove({_id: this._id});
     }
+  },
+
+  'click [data-action="remove"]': function() {
+    LocalImages.remove({_id: this._id});
   },
 
   'click button, keyup .image-artist, keyup .image-title': function(event, template) {

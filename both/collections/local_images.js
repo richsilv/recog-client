@@ -1,3 +1,5 @@
+LocalImages = new Meteor.Collection('local_images');
+
 /*
  * Add query methods like this:
  *  LocalImages.findPublic = function () {

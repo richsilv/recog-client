@@ -21,7 +21,17 @@ _.each(App.helpers, function(helper, key) {
 
 UI.body.rendered = function() {
 	$('body').hammer({
-/*		touchAction: 'pan-y',
-		domEvents: true	*/
 	});
 };
+
+Messages.find().observe({
+	added: function (document) {
+        $.UIkit.notify({
+            message: document.content,
+            timeout: document.timeout || 3000,
+            pos: 'top-right',
+            status: document.status || 'info'
+        });
+		Messages.remove({_id: document._id});
+	}
+});
